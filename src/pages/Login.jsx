@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { mobile } from "../Responsive";
 
 const Container = styled.div`
   width: 100vw;
@@ -18,6 +19,7 @@ const Wrapper = styled.div`
   width: 25%;
   padding: 20px;
   background-color: rgba(248, 222, 126, 0.5);
+  ${mobile({ width: "75%" })}
 `;
 
 const Title = styled.h1`

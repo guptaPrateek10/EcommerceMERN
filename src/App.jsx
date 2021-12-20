@@ -9,6 +9,11 @@ const App = () => {
   return (
     <div>
       <Home />
+      {/* <Login /> */}
+      {/* <Register /> */}
+      <ProductList />
+      <Product />
+      <Cart />
     </div>
   );
 };
