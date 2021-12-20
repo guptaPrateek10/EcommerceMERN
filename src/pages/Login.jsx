@@ -5,7 +5,7 @@ const Container = styled.div`
   width: 100vw;
   height: 100vh;
   background: linear-gradient(
-      rgba(255, 255, 255, 0.3),
+      rgba(255, 255, 255, 0.303),
       rgba(255, 255, 255, 0.4)
     ),
     url("https://wallpaperaccess.com/full/685279.jpg") center;
