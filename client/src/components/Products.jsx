@@ -23,7 +23,9 @@ const Products = (cat, filters, sort) => {
             ? `http://localhost:5000/api/products?category=${cat}`
             : "http://localhost:5000/api/products"
         );
-        setProducts(res.data);
+        if (Object.keys(res).length > 0) {
+          setProducts(res.data);
+        }
         console.log(res);
       } catch (err) {
         console.log(err);
@@ -56,7 +58,7 @@ const Products = (cat, filters, sort) => {
         [...prev].sort((a, b) => b.price - a.price)
       );
     }
-  });
+  }, []);
   console.log(cat, filters, sort);
   return (
     <Container>

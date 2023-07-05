@@ -5,10 +5,10 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Cart from "./pages/Cart";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
+import { Redirect } from "react-router-dom/cjs/react-router-dom";
 
 const App = () => {
-  const user = true;
+  const user = false;
   return (
     <Router>
       <Switch>

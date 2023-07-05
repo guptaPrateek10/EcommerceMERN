@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { Badge } from "@mui/material";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import { mobile } from "../Responsive";
+import { useHistory } from "react-router-dom/cjs/react-router-dom";
 // import { grey } from "@mui/material/colors";
 // import { fontSize } from "@mui/system";
 //Main Navigation Div
@@ -75,6 +76,13 @@ const MenuItem = styled.div`
 `;
 
 const Navbar = () => {
+  const history = useHistory();
+
+  const routeChange = () => {
+    let path = `/register`;
+    history.push(path);
+    console.log("From Login");
+  };
   return (
     <Container>
       <Wrapper>
@@ -90,7 +98,7 @@ const Navbar = () => {
         </Center>
         <Right>
           <MenuItem>REGISTER</MenuItem>
-          <MenuItem>SIGN IN</MenuItem>
+          <MenuItem onClick={routeChange}> SIGN IN</MenuItem>
           <MenuItem>
             <Badge color="secondary" badgeContent={4}>
               <ShoppingCartOutlinedIcon />
