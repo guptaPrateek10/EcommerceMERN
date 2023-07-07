@@ -17,6 +17,7 @@ router.post("/register", async (req, res) => {
     const savedUser = await newUser.save();
     res.status(201).json(savedUser);
   } catch (err) {
+    console.log(err);
     res.status(350).json(err);
   }
 });
@@ -37,7 +38,7 @@ router.post("/login", async (req, res) => {
     OriginalPassword !== req.body.password &&
       res.status(401).json("Wrong Credentials");
 
-    // CREATING  THE ACCESS TOKEN FOR JSONWEBTOKEN
+    // CREATING  THE ACCESS TOKEN FOR JSON WEB TOKEN go to 50.20 on yt
     const accessTokan = jwt.sign(
       {
         id: user._id,
