@@ -4,32 +4,20 @@ import ProductList from "./pages/ProductList";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Cart from "./pages/Cart";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { Redirect } from "react-router-dom/cjs/react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 const App = () => {
   const user = false;
   return (
-    <Router>
-      <Switch>
-        <Route exact path="/">
-          <Home />
-        </Route>
-        <Route path="/login">{user ? <Redirect to="/" /> : <Login />}</Route>
-        <Route path="/register">
-          {user ? <Redirect to="/" /> : <Register />}
-        </Route>
-        <Route path="/products/:category">
-          <ProductList />
-        </Route>
-        <Route path="/product/:id">
-          <Product />
-        </Route>
-        <Route path="/cart">
-          <Cart />
-        </Route>
-      </Switch>
-    </Router>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/login" element={user ? <Home /> : <Login />} />
+      <Route path="/register" element={user ? <Home /> : <Register />} />
+      <Route path="/products/:category" element={<ProductList />} />
+      <Route path="/product/:id" element={<Product />} />
+      <Route path="/products" element={<ProductList />} />
+      <Route path="/cart" element={<Cart />} />
+    </Routes>
   );
 };
 

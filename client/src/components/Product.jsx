@@ -17,6 +17,7 @@ const Info = styled.div`
   align-items: center;
   justify-content: center;
   transition: all 0.3s ease-in-out;
+  cursor: pointer;
 `;
 
 const Container = styled.div`
