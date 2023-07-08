@@ -11,7 +11,7 @@ const {
 // CREATE ORDER
 
 router.post("/", verifyToken, async (req, res) => {
-  const newOrder = new Cart(req.body);
+  const newOrder = new Order(req.body);
   try {
     const savedOrder = await newOrder.save();
     console.log(savedOrder);
