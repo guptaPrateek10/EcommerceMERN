@@ -7,9 +7,11 @@ const authRoute = require("./routes/auth");
 const productRoute = require("./routes/product");
 const orderRoute = require("./routes/order");
 const cartRoute = require("./routes/cart");
-
+const stripeRoute = require("./routes/stripe");
+const cors = require("cors");
 app.use(express.json({ type: "application/json" }));
 dotenv.config();
+app.use(cors());
 
 mongoose
   .connect(process.env.MONGO_URL)
@@ -28,6 +30,4 @@ app.use("/api/users", userRoute);
 app.use("/api/products", productRoute);
 app.use("/api/carts", cartRoute);
 app.use("/api/orders", orderRoute);
-// app.get("/api/test", () => {
-//   console.log("Successful");
-// });
+app.use("/api/checkout", stripeRoute);
