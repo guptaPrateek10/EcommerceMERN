@@ -54,9 +54,7 @@ const Link = styled.a`
   text-decoration: underline;
   cursor: pointer;
 `;
-const xyz = () => {
-  console.log("hello");
-};
+const xyz = () => {};
 const Login = () => {
   return (
     <Container>

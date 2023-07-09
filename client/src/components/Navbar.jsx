@@ -6,15 +6,16 @@ import { Badge } from "@mui/material";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import { mobile } from "../Responsive";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 // import { grey } from "@mui/material/colors";
 // import { fontSize } from "@mui/system";
 //Main Navigation Div
 
 const Navbar = () => {
+  const quantity = useSelector((state) => state.cart.quantity);
   const navigate = useNavigate();
 
   const routeChange = (path) => {
-    console.log(path);
     navigate(path);
   };
   return (
@@ -34,7 +35,7 @@ const Navbar = () => {
           <MenuItem onClick={() => routeChange("/register")}>REGISTER</MenuItem>
           <MenuItem onClick={() => routeChange("/login")}> SIGN IN</MenuItem>
           <MenuItem>
-            <Badge color="secondary" badgeContent={4}>
+            <Badge color="secondary" badgeContent={quantity}>
               <ShoppingCartOutlinedIcon />
             </Badge>
           </MenuItem>

@@ -9,12 +9,9 @@ const { verifyTokenAndAdmin } = require("./verifyToken");
 router.post("/", verifyTokenAndAdmin, async (req, res) => {
   const newProduct = new Product(req.body);
   try {
-    console.log("Inside try");
     const savedProduct = await newProduct.save();
-    console.log(savedProduct);
     res.status(200).json(savedProduct);
   } catch (err) {
-    console.log("inside catch");
     res.status(500).json(err);
   }
 });
