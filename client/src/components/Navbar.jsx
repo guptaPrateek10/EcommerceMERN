@@ -5,14 +5,14 @@ import styled from "styled-components";
 import { Badge } from "@mui/material";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import { mobile } from "../Responsive";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 // import { grey } from "@mui/material/colors";
 // import { fontSize } from "@mui/system";
 //Main Navigation Div
 
 const Navbar = () => {
-  const quantity = useSelector((state) => state.cart.quantity);
+  const quantity = useSelector((state) => state.cartSlice.quantity);
   const navigate = useNavigate();
 
   const routeChange = (path) => {
@@ -34,11 +34,13 @@ const Navbar = () => {
         <Right>
           <MenuItem onClick={() => routeChange("/register")}>REGISTER</MenuItem>
           <MenuItem onClick={() => routeChange("/login")}> SIGN IN</MenuItem>
-          <MenuItem>
-            <Badge color="secondary" badgeContent={quantity}>
-              <ShoppingCartOutlinedIcon />
-            </Badge>
-          </MenuItem>
+          <Link to="/cart">
+            <MenuItem>
+              <Badge color="secondary" badgeContent={quantity}>
+                <ShoppingCartOutlinedIcon />
+              </Badge>
+            </MenuItem>
+          </Link>
         </Right>
       </Wrapper>
     </Container>

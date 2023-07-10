@@ -9,7 +9,7 @@ import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { publicRequests } from "../serviceLayer/requestMethods";
 import { useDispatch } from "react-redux";
-import { addProduct } from "../redux/cartRedux";
+import { addProduct, addProductToCart } from "../redux/cartRedux";
 const Product = () => {
   const location = useLocation();
   const productID = location.pathname.split("/")[2];
@@ -39,7 +39,7 @@ const Product = () => {
     if (size === null || color === null) {
       alert("Please select size & color");
     } else {
-      dispath(addProduct({ ...product, color, size, quantity }));
+      dispath(addProductToCart({ ...product, color, size, quantity }));
     }
   };
   return (

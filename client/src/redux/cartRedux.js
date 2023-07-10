@@ -8,7 +8,7 @@ const cartSlice = createSlice({
     total: 0,
   },
   reducers: {
-    addProduct: (state, action) => {
+    addProductToCart: (state, action) => {
       state.quantity += 1;
       state.products.push(action.payload);
       state.total += action.payload.price * action.payload.quantity;
@@ -16,5 +16,5 @@ const cartSlice = createSlice({
   },
 });
 
-export const { addProduct } = cartSlice.actions;
+export const { addProductToCart } = cartSlice.actions;
 export default cartSlice.reducer;

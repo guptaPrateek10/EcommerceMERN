@@ -4,6 +4,89 @@ import Announcement from "../components/Announcement";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import { mobile } from "../Responsive";
+import { useSelector, useDispatch } from "react-redux";
+
+const Cart = () => {
+  const cart = useSelector((state) => state.cartSlice);
+  console.log(cart);
+  return (
+    <Container>
+      <Navbar />
+      <Announcement />
+      <Wrapper>
+        <Title>Your Bag</Title>
+        <Top>
+          <TopButton>CONTINUE SHOPPING</TopButton>
+          <TopTexts>
+            <TopText>Shopping bag(2)</TopText>
+            <TopText>Your Whislist(0)</TopText>
+          </TopTexts>
+
+          <TopButton type="filled">CHECKOUT NOW</TopButton>
+        </Top>
+        <Bottom>
+          <Info>
+            {cart.products?.map((product, idx) => (
+              <>
+                <Product>
+                  <ProductDetail>
+                    <Image src={product.img} />
+                    <Details>
+                      <ProductName>
+                        <b>Product:</b> {product.title}
+                      </ProductName>
+                      <ProductId>
+                        <b>ID:</b>
+                        {product._id}
+                      </ProductId>
+                      <ProductColor color="black" />
+                      <ProductSize>
+                        <b>Size:</b>
+                        {product.size}
+                      </ProductSize>
+                    </Details>
+                  </ProductDetail>
+                  <PriceDetail>
+                    <ProductAmountContainer>
+                      <Add />
+                      <ProductAmount>{product.quantity}</ProductAmount>
+                      <Remove />
+                    </ProductAmountContainer>
+                    <ProductPrice>
+                      {product.price * product.quantity} Rs
+                    </ProductPrice>
+                  </PriceDetail>
+                </Product>
+                <Hr />
+              </>
+            ))}
+          </Info>
+          <Summery>
+            <SummeryTitle>ORDER SUMMERY</SummeryTitle>
+            <SummeryItem>
+              <SummeryItemText>Subtotal</SummeryItemText>
+              <SummeryItemPrice>{cart.total}</SummeryItemPrice>
+            </SummeryItem>
+            <SummeryItem>
+              <SummeryItemText>Estimated Shipping</SummeryItemText>
+              <SummeryItemPrice>$5</SummeryItemPrice>
+            </SummeryItem>
+            <SummeryItem>
+              <SummeryItemText>Shipping Discount</SummeryItemText>
+              <SummeryItemPrice>$-5</SummeryItemPrice>
+            </SummeryItem>
+            <SummeryItem type="total">
+              <SummeryItemText>Total</SummeryItemText>
+              <SummeryItemPrice>{cart.total}</SummeryItemPrice>
+            </SummeryItem>
+            <Button>CHECKOUT NOW</Button>
+          </Summery>
+        </Bottom>
+      </Wrapper>
+      <Footer />
+    </Container>
+  );
+};
 
 const Container = styled.div``;
 
@@ -149,102 +232,5 @@ const Button = styled.button`
   color: white;
   font-weight: 500;
 `;
-
-const Cart = () => {
-  return (
-    <Container>
-      <Navbar />
-      <Announcement />
-      <Wrapper>
-        <Title>Your Bag</Title>
-        <Top>
-          <TopButton>CONTINUE SHOPPING</TopButton>
-          <TopTexts>
-            <TopText>Shopping bag(2)</TopText>
-            <TopText>Your Whislist(0)</TopText>
-          </TopTexts>
-
-          <TopButton type="filled">CHECKOUT NOW</TopButton>
-        </Top>
-        <Bottom>
-          <Info>
-            <Product>
-              <ProductDetail>
-                <Image src="https://image.freepik.com/free-photo/full-length-portrait-happy-excited-girl-bright-colorful-clothes-holding-shopping-bags-while-standing-showing-peace-gesture-isolated_231208-5946.jpg" />
-                <Details>
-                  <ProductName>
-                    <b>Product:</b> JESSIE TSHIRT
-                  </ProductName>
-                  <ProductId>
-                    <b>ID:</b>996554646
-                  </ProductId>
-                  <ProductColor color="black" />
-                  <ProductSize>
-                    <b>Size:</b>36
-                  </ProductSize>
-                </Details>
-              </ProductDetail>
-              <PriceDetail>
-                <ProductAmountContainer>
-                  <Add />
-                  <ProductAmount>2</ProductAmount>
-                  <Remove />
-                </ProductAmountContainer>
-                <ProductPrice>$45</ProductPrice>
-              </PriceDetail>
-            </Product>
-            <Hr />
-            <Product>
-              <ProductDetail>
-                <Image src="https://image.freepik.com/free-photo/full-length-portrait-happy-excited-girl-bright-colorful-clothes-holding-shopping-bags-while-standing-showing-peace-gesture-isolated_231208-5946.jpg" />
-                <Details>
-                  <ProductName>
-                    <b>Product:</b> JESSIE TSHIRT
-                  </ProductName>
-                  <ProductId>
-                    <b>ID:</b>996554646
-                  </ProductId>
-                  <ProductColor color="black" />
-                  <ProductSize>
-                    <b>Size:</b>36
-                  </ProductSize>
-                </Details>
-              </ProductDetail>
-              <PriceDetail>
-                <ProductAmountContainer>
-                  <Add />
-                  <ProductAmount>2</ProductAmount>
-                  <Remove />
-                </ProductAmountContainer>
-                <ProductPrice>$45</ProductPrice>
-              </PriceDetail>
-            </Product>
-          </Info>
-          <Summery>
-            <SummeryTitle>ORDER SUMMERY</SummeryTitle>
-            <SummeryItem>
-              <SummeryItemText>Subtotal</SummeryItemText>
-              <SummeryItemPrice>$45</SummeryItemPrice>
-            </SummeryItem>
-            <SummeryItem>
-              <SummeryItemText>Estimated Shipping</SummeryItemText>
-              <SummeryItemPrice>$5</SummeryItemPrice>
-            </SummeryItem>
-            <SummeryItem>
-              <SummeryItemText>Shipping Discount</SummeryItemText>
-              <SummeryItemPrice>$-5</SummeryItemPrice>
-            </SummeryItem>
-            <SummeryItem type="total">
-              <SummeryItemText>Total</SummeryItemText>
-              <SummeryItemPrice>$45</SummeryItemPrice>
-            </SummeryItem>
-            <Button>CHECKOUT NOW</Button>
-          </Summery>
-        </Bottom>
-      </Wrapper>
-      <Footer />
-    </Container>
-  );
-};
 
 export default Cart;
