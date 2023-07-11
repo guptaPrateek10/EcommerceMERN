@@ -12,7 +12,7 @@ import { useSelector } from "react-redux";
 //Main Navigation Div
 
 const Navbar = () => {
-  const quantity = useSelector((state) => state.cartSlice.quantity);
+  const quantity = useSelector((state) => state.cart.quantity);
   const navigate = useNavigate();
 
   const routeChange = (path) => {

@@ -7,7 +7,7 @@ import { mobile } from "../Responsive";
 import { useSelector, useDispatch } from "react-redux";
 
 const Cart = () => {
-  const cart = useSelector((state) => state.cartSlice);
+  const cart = useSelector((state) => state.cart);
   console.log(cart);
   return (
     <Container>

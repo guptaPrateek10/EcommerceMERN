@@ -9,7 +9,7 @@ import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { publicRequests } from "../serviceLayer/requestMethods";
 import { useDispatch } from "react-redux";
-import { addProduct, addProductToCart } from "../redux/cartRedux";
+import { addProductToCart } from "../redux/cartSlice";
 const Product = () => {
   const location = useLocation();
   const productID = location.pathname.split("/")[2];
