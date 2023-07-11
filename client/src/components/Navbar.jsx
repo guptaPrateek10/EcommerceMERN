@@ -5,10 +5,47 @@ import styled from "styled-components";
 import { Badge } from "@mui/material";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import { mobile } from "../Responsive";
-import { useHistory } from "react-router-dom/cjs/react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 // import { grey } from "@mui/material/colors";
 // import { fontSize } from "@mui/system";
 //Main Navigation Div
+
+const Navbar = () => {
+  const quantity = useSelector((state) => state.cart.quantity);
+  const navigate = useNavigate();
+
+  const routeChange = (path) => {
+    navigate(path);
+  };
+  return (
+    <Container>
+      <Wrapper>
+        <Left>
+          <Language>En</Language>
+          <SearchContainer>
+            <Input placeholder="search" />
+            <Search style={{ color: "grey", fontSize: 16 }} />
+          </SearchContainer>
+        </Left>
+        <Center>
+          <Logo>Lily Jewellery</Logo>
+        </Center>
+        <Right>
+          <MenuItem onClick={() => routeChange("/register")}>REGISTER</MenuItem>
+          <MenuItem onClick={() => routeChange("/login")}> SIGN IN</MenuItem>
+          <Link to="/cart">
+            <MenuItem>
+              <Badge color="secondary" badgeContent={quantity}>
+                <ShoppingCartOutlinedIcon />
+              </Badge>
+            </MenuItem>
+          </Link>
+        </Right>
+      </Wrapper>
+    </Container>
+  );
+};
 const Container = styled.div`
   max-width: 90vw;
   margin: 0 auto;
@@ -74,40 +111,5 @@ const MenuItem = styled.div`
   font-weight: 600;
   ${mobile({ fontSize: "12px", marginLeft: "10px" })}
 `;
-
-const Navbar = () => {
-  const history = useHistory();
-
-  const routeChange = () => {
-    let path = `/register`;
-    history.push(path);
-    console.log("From Login");
-  };
-  return (
-    <Container>
-      <Wrapper>
-        <Left>
-          <Language>En</Language>
-          <SearchContainer>
-            <Input placeholder="search" />
-            <Search style={{ color: "grey", fontSize: 16 }} />
-          </SearchContainer>
-        </Left>
-        <Center>
-          <Logo>Lily Jewellery</Logo>
-        </Center>
-        <Right>
-          <MenuItem>REGISTER</MenuItem>
-          <MenuItem onClick={routeChange}> SIGN IN</MenuItem>
-          <MenuItem>
-            <Badge color="secondary" badgeContent={4}>
-              <ShoppingCartOutlinedIcon />
-            </Badge>
-          </MenuItem>
-        </Right>
-      </Wrapper>
-    </Container>
-  );
-};
 
 export default Navbar;

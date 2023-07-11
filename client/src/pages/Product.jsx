@@ -5,6 +5,87 @@ import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import Newsletter from "../components/Newsletter";
 import { mobile } from "../Responsive";
+import { useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { publicRequests } from "../serviceLayer/requestMethods";
+import { useDispatch } from "react-redux";
+import { addProductToCart } from "../redux/cartSlice";
+const Product = () => {
+  const location = useLocation();
+  const productID = location.pathname.split("/")[2];
+  const [product, setProduct] = useState({});
+  const [quantity, setQuantity] = useState(1);
+  const [color, setColor] = useState(null);
+  const [size, setSize] = useState(null);
+
+  const dispath = useDispatch();
+  useEffect(() => {
+    const getRequest = async () => {
+      const res = await publicRequests.get("products/find/" + productID);
+      setProduct(res.data);
+    };
+    getRequest();
+  }, [productID]);
+
+  const handleAction = (type) => {
+    if (type === "dec") {
+      quantity > 1 && setQuantity(quantity - 1);
+    } else {
+      setQuantity(quantity + 1);
+    }
+  };
+
+  const handleAdd2Cart = () => {
+    if (size === null || color === null) {
+      alert("Please select size & color");
+    } else {
+      dispath(addProductToCart({ ...product, color, size, quantity }));
+    }
+  };
+  return (
+    <Container>
+      <Navbar />
+      <Announcement />
+      <Wrapper>
+        <ImgContainer>
+          <Image src={product.img}></Image>
+        </ImgContainer>
+        <InfoContainer>
+          <Title>{product.title}</Title>
+          <Desc>{product.desc}</Desc>
+          <Price>{product.price} Rs</Price>
+          <FilterContainer>
+            <Filter>
+              <FilterTitle>Color</FilterTitle>
+              {product.color?.map((c) => (
+                <FilterColor key={c} color={c} onClick={() => setColor(c)} />
+              ))}
+            </Filter>
+            <Filter>
+              <FilterTitle>Size</FilterTitle>
+              <FilterSize onChange={(e) => setSize(e.target.value)}>
+                {product.size?.map((s) => (
+                  <FilterSizeOption key={s}>{s}</FilterSizeOption>
+                ))}
+              </FilterSize>
+            </Filter>
+          </FilterContainer>
+
+          <AddContainer>
+            <AmountContainer>
+              <Remove onClick={() => handleAction("dec")} />
+              <Amount>{quantity}</Amount>
+              <Add onClick={() => handleAction("add")} />
+            </AmountContainer>
+            <Button onClick={handleAdd2Cart}>ADD TO CART</Button>
+          </AddContainer>
+        </InfoContainer>
+      </Wrapper>
+      <Newsletter />
+      <Footer />
+    </Container>
+  );
+};
 
 const Container = styled.div``;
 
@@ -38,10 +119,15 @@ const Price = styled.span`
   font-size: 50px;
 `;
 const FilterContainer = styled.div`
-  width: 50%;
+  width: 60%;
   display: flex;
+  background-color: "gray";
   justify-content: space-between;
+  border-radius: 10px;
   margin: 30px 0px;
+  padding: 20px;
+  background-color: rgb(128, 128, 128, 0.3);
+
   ${mobile({ width: "100%" })}
 `;
 
@@ -106,58 +192,5 @@ const Button = styled.button`
     background-color: #03915f73;
   }
 `;
-
-const Product = () => {
-  return (
-    <Container>
-      <Navbar />
-      <Announcement />
-      <Wrapper>
-        <ImgContainer>
-          <Image src="https://image.freepik.com/free-photo/full-length-portrait-happy-excited-girl-bright-colorful-clothes-holding-shopping-bags-while-standing-showing-peace-gesture-isolated_231208-5946.jpg"></Image>
-        </ImgContainer>
-        <InfoContainer>
-          <Title>Denim Jeans & Tshirt</Title>
-          <Desc>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptate
-            inventore, sunt velit minus, labore perferendis rem incidunt tempore
-            cumque voluptates magnam beatae totam. Officia itaque voluptates
-            cum, ipsam dolores obcaecati.
-          </Desc>
-          <Price>2500 rs</Price>
-          <FilterContainer>
-            <Filter>
-              <FilterTitle>Color</FilterTitle>
-              <FilterColor color="blue" />
-              <FilterColor color="red" />
-              <FilterColor color="green" />
-            </Filter>
-            <Filter>
-              <FilterTitle>Type</FilterTitle>
-              <FilterSize>
-                <FilterSizeOption>XS</FilterSizeOption>
-                <FilterSizeOption>S</FilterSizeOption>
-                <FilterSizeOption>M</FilterSizeOption>
-                <FilterSizeOption>L</FilterSizeOption>
-                <FilterSizeOption>XL</FilterSizeOption>
-                <FilterSizeOption>XXL</FilterSizeOption>
-              </FilterSize>
-            </Filter>
-          </FilterContainer>
-          <AddContainer>
-            <AmountContainer>
-              <Remove />
-              <Amount>1</Amount>
-              <Add />
-            </AmountContainer>
-            <Button>ADD TO CART</Button>
-          </AddContainer>
-        </InfoContainer>
-      </Wrapper>
-      <Newsletter />
-      <Footer />
-    </Container>
-  );
-};
 
 export default Product;

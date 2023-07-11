@@ -38,6 +38,7 @@ const ProductList = () => {
   const [sort, setSort] = useState("newest");
 
   const handleFilters = (e) => {
+    e.preventDefault();
     const value = e.target.value;
     setFilters({ ...filters, [e.target.name]: value });
   };
@@ -45,7 +46,7 @@ const ProductList = () => {
     <Container>
       <Navbar />
       <Announcement />
-      <Title>Dresses</Title>
+      <Title>{cat}</Title>
       <FilterContainer>
         <Filter>
           <FilterText>Filter Products</FilterText>
