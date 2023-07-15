@@ -1,5 +1,10 @@
 import { publicRequests } from "../serviceLayer/requestMethods";
-import { loginFailure, loginStart, loginSuccess } from "./userSlice";
+import {
+  loginFailure,
+  loginStart,
+  loginSuccess,
+  logoutSuccess,
+} from "./userSlice";
 
 export const login = async (dispatch, user) => {
   dispatch(loginStart());
@@ -9,4 +14,8 @@ export const login = async (dispatch, user) => {
   } catch (err) {
     dispatch(loginFailure());
   }
+};
+
+export const logout = async (dispatch) => {
+  dispatch(logoutSuccess());
 };

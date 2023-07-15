@@ -6,18 +6,37 @@ import { Badge } from "@mui/material";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import { mobile } from "../Responsive";
 import { Link, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "../redux/apiCalls";
+import LogoutModal from "../pages/Logout/LogoutModal";
+import { useState } from "react";
 // import { grey } from "@mui/material/colors";
 // import { fontSize } from "@mui/system";
 //Main Navigation Div
 
 const Navbar = () => {
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
   const quantity = useSelector((state) => state.cart.quantity);
   const navigate = useNavigate();
-
+  const currentUserID = useSelector((state) => state.user.currentUser);
   const routeChange = (path) => {
     navigate(path);
   };
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    // Show the logout modal
+    setShowLogoutModal(true);
+  };
+
+  const handleCloseModal = () => {
+    logout(dispatch, null);
+    routeChange("/");
+    // Hide the logout modal
+    setShowLogoutModal(false);
+  };
+
+  console.log(currentUserID);
   return (
     <Container>
       <Wrapper>
@@ -33,7 +52,12 @@ const Navbar = () => {
         </Center>
         <Right>
           <MenuItem onClick={() => routeChange("/register")}>REGISTER</MenuItem>
-          <MenuItem onClick={() => routeChange("/login")}> SIGN IN</MenuItem>
+
+          {currentUserID ? (
+            <MenuItem onClick={handleLogout}> SIGN OUT</MenuItem>
+          ) : (
+            <MenuItem onClick={() => routeChange("/login")}> SIGN IN</MenuItem>
+          )}
           <Link to="/cart">
             <MenuItem>
               <Badge color="secondary" badgeContent={quantity}>
@@ -43,6 +67,7 @@ const Navbar = () => {
           </Link>
         </Right>
       </Wrapper>
+      {showLogoutModal && <LogoutModal onClose={handleCloseModal} />}
     </Container>
   );
 };
