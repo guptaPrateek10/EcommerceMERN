@@ -1,14 +1,11 @@
 import styled from "styled-components";
 import { mobile } from "../Responsive";
-
+import img4 from "../assets/Pics/img4.jpg";
 const Container = styled.div`
   width: 100vw;
   height: 100vh;
-  background: linear-gradient(
-      rgba(255, 255, 255, 0.3),
-      rgba(255, 255, 255, 0.4)
-    ),
-    url("https://wallpaperaccess.com/full/685279.jpg") center;
+  background: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0)),
+    url(${img4}) center;
   background-size: cover;
   display: flex;
   align-items: center;
@@ -18,7 +15,7 @@ const Container = styled.div`
 const Wrapper = styled.div`
   width: 40%;
   padding: 20px;
-  background-color: rgba(248, 222, 126, 0.5);
+  background-color: rgba(255, 255, 255, 0.8);
   ${mobile({ width: "75%" })}
 `;
 
@@ -35,6 +32,7 @@ const Form = styled.form`
 const Input = styled.input`
   flex: 1;
   min-width: 40%;
+  padding: 10px;
   margin: 20px 10px 0px 0px;
 `;
 
@@ -50,6 +48,9 @@ const Button = styled.button`
   background-color: teal;
   color: white;
   cursor: pointer;
+  &:hover {
+    background-color: #0eb683;
+  }
 `;
 
 const Register = () => {
