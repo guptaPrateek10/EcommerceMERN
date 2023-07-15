@@ -55,24 +55,15 @@ const useFormValidation = () => {
     return Object.keys(validationErrors).length === 0;
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const isValid = validate();
-    if (isValid) {
-      // Perform form submission or any other action here
-      console.log("Form is valid");
-      setValues({});
-      setErrors({});
-      setIsSubmitting(true);
-    }
-  };
-
   return {
     values,
     errors,
     isSubmitting,
     handleChange,
-    handleSubmit,
+    validate,
+    setValues,
+    setErrors,
+    setIsSubmitting,
   };
 };
 

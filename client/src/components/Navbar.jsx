@@ -35,6 +35,7 @@ const Navbar = () => {
     // Hide the logout modal
     setShowLogoutModal(false);
   };
+  console.log(currentUserID);
 
   return (
     <Container>

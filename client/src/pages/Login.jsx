@@ -35,7 +35,7 @@ const Login = () => {
             LOGIN
           </Button>
           {error && <Error>Something Went Wrong...</Error>}
-          {!error && <Success>You are now logged in.</Success>}
+          {/* {!error && <Success>You are now logged in.</Success>} */}
           <Link>DO NOT REMEMBER THE PASSWORD?</Link>
           <Link>CREATE A NEW ACCOUNT.</Link>
         </Form>
