@@ -36,7 +36,6 @@ const Navbar = () => {
     setShowLogoutModal(false);
   };
 
-  console.log(currentUserID);
   return (
     <Container>
       <Wrapper>
